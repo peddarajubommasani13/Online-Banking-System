@@ -196,41 +196,39 @@ Hibernate will automatically generate all required tables during the first run.
 
 ## Screenshots
 
-### Login Page
+### Landing Page
 
-![Login](screenshots/Screenshot%202026-07-01%20212817.png)
+![Landing Page](screenshots/FrontEndPage.png)
 
 ---
 
-### Registration Page
+### Login Page
 
-![Register](screenshots/Screenshot%202026-07-01%20212847.png)
+![Login Page](screenshots/LoginPage.png)
 
 ---
 
 ### Dashboard
 
-![Dashboard](screenshots/Screenshot%202026-07-01%20212910.png)
+![Dashboard](screenshots/Dashboard.png)
 
 ---
 
-### Deposit Money
+### Withdraw Money
 
-![Deposit](screenshots/Screenshot%202026-07-01%20212955.png)
+![Withdraw Money](screenshots/withdraw.png)
 
 ---
 
 ### Fund Transfer
 
-![Fund Transfer](screenshots/Screenshot%202026-07-01%20213005.png)
+![Fund Transfer](screenshots/fund.png)
 
 ---
 
-### Transaction History
+### Account PIN
 
-![Transaction History](screenshots/Screenshot%202026-07-01%20213013.png)
-
-
+![Account PIN](screenshots/pin.png)
 ## Future Enhancements
 
 - Email Notifications
