@@ -1,104 +1,243 @@
-# Banking Portal Rest API Using Spring Boot & Spring Security
+# Online Banking System using Spring Boot & Spring Security
 
-## Fork and Star ⭐ Github Repo For New Feature Update
+A secure **Online Banking System** developed using **Java, Spring Boot, Spring Security, JWT, Hibernate, MySQL, and Angular**. This project demonstrates secure banking operations such as user authentication, account management, fund transfers, transaction history, OTP verification, and RESTful APIs.
 
-[![GitHub Repo](https://img.shields.io/badge/GitHub-UI%20Repo-blue.svg?style=flat-square)](https://github.com/abhi9720/BankingPortal-UI)
-[![GitHub Repo](https://img.shields.io/badge/GitHub-API%20Repo-blue.svg?style=flat-square)](https://github.com/abhi9720/BankingPortal-API)
+---
 
-## API Documentation
+## GitHub Repositories
 
-- [https://github.com/abhi9720/BankingPortal-API/wiki](https://github.com/abhi9720/BankingPortal-API/wiki)
+### Backend Repository
+
+🔗 https://github.com/peddarajubommasani13/Online-Banking-System
+
+### Frontend Repository
+
+🔗 https://github.com/peddarajubommasani13/Online-Banking-System-UI
+
+---
 
 ## Banking Portal UI
 
-- [https://github.com/abhi9720/BankingPortal-UI](https://github.com/abhi9720/BankingPortal-UI)
+The frontend is developed using **Angular** and communicates with the Spring Boot REST APIs.
 
-![image](https://github.com/abhi9720/BankingPortal-API/assets/68281476/237694d9-6e8d-48e8-a7a2-982b9f8ca671)
+---
 
-***
+# Project Overview
 
-The Banking Portal API provides a set of endpoints for managing user accounts, fund transfers, and transactions. This project aims to facilitate secure and efficient banking operations for users.
+The Online Banking System provides secure banking services through REST APIs. It allows users to register, authenticate, manage accounts, perform transactions, and securely transfer funds.
+
+---
 
 ## Features
 
-- User Registration: Users can register by providing their details, such as name, email, address, and phone number.
-- PIN Management: Users can create and update their PINs for added security.
-- Cash Deposit and Withdrawal: Users can deposit and withdraw cash from their accounts.
-- Fund Transfer: Users can transfer funds to other accounts within the system.
-- Transaction History: Users can view their transaction history.
+- User Registration
+- User Login using JWT Authentication
+- Spring Security Authorization
+- Account Creation
+- PIN Management
+- Cash Deposit
+- Cash Withdrawal
+- Fund Transfer
+- Transaction History
+- Password Reset using OTP
+- Global Exception Handling
+- RESTful APIs
+- MySQL Database Integration
+- Angular Frontend
+
+---
 
 ## Technologies Used
 
-![image](https://github.com/abhi9720/BankingPortal-API/assets/68281476/31896d20-16d9-4fe1-a534-0490841de4b9)
-![image](https://github.com/abhi9720/BankingPortal-API/assets/68281476/c09bc4ac-c0ca-4f7c-9c6e-8eb9818eb35b)
-![image](https://github.com/abhi9720/BankingPortal-API/assets/68281476/78c75fff-e8a8-49c6-9897-34b08b2c9308)
-![image](https://github.com/abhi9720/BankingPortal-API/assets/68281476/3647613e-1d6e-4bc4-98b6-2da5648659f9)
-![image](https://github.com/abhi9720/BankingPortal-API/assets/68281476/8a5c0b00-776b-444e-bc24-36fc6bfe4c41)
-![image](https://github.com/abhi9720/BankingPortal-API/assets/68281476/b56a7167-6a3a-49a0-8b8a-8a4e3e71a383)
-![image](https://github.com/abhi9720/BankingPortal-API/assets/68281476/b5c86e65-cbe8-400a-afeb-895846601da7)
+### Backend
 
-## TODO
+- Java 17
+- Spring Boot
+- Spring Security
+- Spring Data JPA
+- Hibernate
+- JWT Authentication
+- Maven
 
-- UI Fix for Dashboard Charts
-- Pagination in table
-- Save JWT Token in db and remove on logout
-- Email trigger on account login
-- Send Bank Statement on Email
+### Frontend
+
+- Angular
+- TypeScript
+- HTML
+- CSS
+
+### Database
+
+- MySQL
+
+### Other Technologies
+
+- Redis
+- Caffeine Cache
+- Git
+- GitHub
+- Postman
+
+---
 
 ## Installation and Setup
 
-1. Clone the repository: `git clone https://github.com/yourusername/banking-portal-api.git`
-2. Navigate to the project folder: `cd banking-portal-api`
-3. Configure MySQL: Set up a MySQL database, create a copy of `application.properties.sample`, rename it `application.properties`, and update the properties as needed.
-4. Build and run the project: `mvn spring-boot:run`
+### Clone Backend
+
+```bash
+git clone https://github.com/peddarajubommasani13/Online-Banking-System.git
+```
+
+### Clone Frontend
+
+```bash
+git clone https://github.com/peddarajubommasani13/Online-Banking-System-UI.git
+```
+
+---
+
+## Backend Setup
+
+Navigate to the backend project.
+
+```bash
+cd Online-Banking-System
+```
+
+Create a copy of
+
+```
+application.properties.sample
+```
+
+Rename it to
+
+```
+application.properties
+```
+
+Update the following properties:
+
+- MySQL Username
+- MySQL Password
+- JWT Secret
+- Mail Configuration
+- Redis Configuration (Optional)
+
+Run the backend:
+
+```bash
+./mvnw spring-boot:run
+```
+
+Backend URL
+
+```
+http://localhost:8180
+```
+
+---
+
+## Frontend Setup
+
+Navigate to the frontend project.
+
+```bash
+cd Online-Banking-System-UI
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Run Angular
+
+```bash
+npm start
+```
+
+Frontend URL
+
+```
+http://localhost:4200
+```
+
+---
+
+## Database Setup
+
+Create a MySQL database:
+
+```sql
+CREATE DATABASE bankingapp;
+```
+
+Hibernate will automatically generate all required tables during the first run.
+
+---
+
+## REST APIs
+
+- User Registration
+- User Login
+- Generate OTP
+- Verify OTP
+- Reset Password
+- Create Account
+- Deposit Money
+- Withdraw Money
+- Fund Transfer
+- Transaction History
+- Dashboard APIs
+
+---
 
 ## Screenshots
 
-![project](https://github.com/abhi9720/BankingPortal-API/assets/68281476/45bca1e0-0af2-4d63-a8d0-efd7b67df6bf)
+
+
+## Future Enhancements
+
+- Email Notifications
+- PDF Bank Statements
+- Dashboard Analytics
+- Admin Panel
+- Docker Deployment
+- CI/CD Pipeline
+- Kubernetes Deployment
+
+---
 
 ## Error Handling
 
-The API implements global exception handling for common error scenarios, such as account not found, unauthorized access, and insufficient balance.
+The application provides centralized exception handling for:
 
-## How to Contribute
+- Invalid Credentials
+- Unauthorized Access
+- Account Not Found
+- Invalid OTP
+- Insufficient Balance
+- Validation Errors
+- Token Expiration
 
-We welcome and encourage developers to contribute to the project and help us make it even better. If you are interested in contributing, follow these steps:
+---
 
-👉🏻**Fork the Repository**: Click on the "Fork" button on the top right corner of the GitHub repository page. This will create a copy of the repository in your GitHub account.
+## Author
 
-👉🏻**Clone the Forked Repository**: Open your terminal or command prompt and use the following command to clone the repository to your local machine:
+**Peddaraju Bommasani**
 
-   ```sh
-   git clone https://github.com/your-username/BankingPortal-API.git
-   ```
+GitHub
 
-   Replace `your-username` with your GitHub username.
+https://github.com/peddarajubommasani13
 
-👉🏻**Create a New Branch**: Move into the project directory using `cd BankingPortal-API` and create a new branch for your changes:
+LinkedIn
 
-   ```sh
-   git checkout -b feature/your-new-feature
-   ```
+https://www.linkedin.com/in/peddarajubommasani/
 
-   Replace `your-new-feature` with a descriptive name for your contribution.
+---
 
-👉🏻**Make Changes**: Now, make the desired changes to the codebase using your favorite code editor.
+## License
 
-👉🏻**Commit Changes**: After making the changes, save your work and commit the changes with a meaningful commit message:
-
-   ```sh
-   git add .
-   git commit -m "Add your commit message here"
-   ```
-
-👉🏻**Push Changes**: Push your changes to your forked repository:
-
-   ```sh
-   git push origin feature/your-new-feature
-   ```
-
-👉🏻**Create a Pull Request**: Go to your forked repository on GitHub, and you'll see a "Compare & Pull Request" button. Click on it to create a new pull request.
-
-👉🏻**Wait for Review**: Your pull request will be reviewed by the project maintainers. Make any necessary changes based on their feedback.
-
-**👏🏻👏🏻 Congratulations! 🎉🎊** Your contribution has been accepted and merged into the main repository. You are now a contributor to the project.
+This project is developed for educational, learning, and portfolio purposes.
