@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.function.Function;
 
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -49,92 +48,99 @@ public class TokenServiceImpl implements TokenService {
 
     @Override
     public String generateToken(UserDetails userDetails) {
-        log.info("Generating token for user: " + userDetails.getUsername());
-        return doGenerateToken(userDetails,
-                new Date(System.currentTimeMillis() + expiration));
+        log.info("Generating token for user: {}", userDetails.getUsername());
+        return doGenerateToken(userDetails, new Date(System.currentTimeMillis() + expiration));
     }
 
     @Override
     public String generateToken(UserDetails userDetails, Date expiry) {
-        log.info("Generating token for user: " + userDetails.getUsername());
+        log.info("Generating token for user: {}", userDetails.getUsername());
         return doGenerateToken(userDetails, expiry);
     }
+
     private Key key() {
-        byte[] keyBytes = Decoders.BASE64.decode(secret);
-        return Keys.hmacShaKeyFor(keyBytes);
+        return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
+
     private String doGenerateToken(UserDetails userDetails, Date expiry) {
-        return Jwts.builder().setSubject(userDetails.getUsername())
+        return Jwts.builder()
+                .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(expiry)
-                .signWith(key(), SignatureAlgorithm.HS512).compact();
+                .signWith(key(), SignatureAlgorithm.HS512)
+                .compact();
     }
 
     @Override
     public UserDetails loadUserByUsername(String accountNumber) throws UsernameNotFoundException {
+
         val user = userRepository.findByAccountAccountNumber(accountNumber)
                 .orElseThrow(() -> new UsernameNotFoundException(
                         String.format(ApiMessages.USER_NOT_FOUND_BY_ACCOUNT.getMessage(), accountNumber)));
 
-        return withUsername(accountNumber).password(user.getPassword()).build();
+        return withUsername(accountNumber)
+                .password(user.getPassword())
+                .build();
     }
 
     @Override
-    public Date getExpirationDateFromToken(String token)
-            throws InvalidTokenException {
+    public Date getExpirationDateFromToken(String token) throws InvalidTokenException {
         return getClaimFromToken(token, Claims::getExpiration);
     }
 
     @Override
-    public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver)
+    public <T> T getClaimFromToken(String token,
+            Function<Claims, T> claimsResolver)
             throws InvalidTokenException {
-        val claims = getAllClaimsFromToken(token);
+
+        final Claims claims = getAllClaimsFromToken(token);
         return claimsResolver.apply(claims);
     }
-    private JwtParser parser() {
-        return Jwts.parserBuilder()
-                .setSigningKey(key())
-                .build();
-    }
-    private Claims getAllClaimsFromToken(String token) throws InvalidTokenException {
+
+    private Claims getAllClaimsFromToken(String token)
+            throws InvalidTokenException {
+
         try {
-           // return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+
             return Jwts.parserBuilder()
                     .setSigningKey(key())
                     .build()
                     .parseClaimsJws(token)
                     .getBody();
-          //  return parser().parseClaimsJws(token).getBody();
-        } catch (ExpiredJwtException e) {
-            // Delete expired token
-            invalidateToken(token);
 
+        } catch (ExpiredJwtException e) {
+
+            invalidateToken(token);
             throw new InvalidTokenException(ApiMessages.TOKEN_EXPIRED_ERROR.getMessage());
 
         } catch (UnsupportedJwtException e) {
+
             throw new InvalidTokenException(ApiMessages.TOKEN_UNSUPPORTED_ERROR.getMessage());
 
         } catch (MalformedJwtException e) {
+
             throw new InvalidTokenException(ApiMessages.TOKEN_MALFORMED_ERROR.getMessage());
 
         } catch (SignatureException e) {
+
             throw new InvalidTokenException(ApiMessages.TOKEN_SIGNATURE_INVALID_ERROR.getMessage());
 
         } catch (IllegalArgumentException e) {
+
             throw new InvalidTokenException(ApiMessages.TOKEN_EMPTY_ERROR.getMessage());
         }
     }
 
     @Override
     public void saveToken(String token) throws InvalidTokenException {
+
         if (tokenRepository.findByToken(token) != null) {
             throw new InvalidTokenException(ApiMessages.TOKEN_ALREADY_EXISTS_ERROR.getMessage());
         }
 
-        val account = accountRepository.findByAccountNumber(
-                getUsernameFromToken(token));
+        val account = accountRepository.findByAccountNumber(getUsernameFromToken(token));
 
-        log.info("Saving token for account: " + account.getAccountNumber());
+        log.info("Saving token for account: {}", account.getAccountNumber());
 
         val tokenObj = new Token(
                 token,
@@ -146,6 +152,7 @@ public class TokenServiceImpl implements TokenService {
 
     @Override
     public void validateToken(String token) throws InvalidTokenException {
+
         if (tokenRepository.findByToken(token) == null) {
             throw new InvalidTokenException(ApiMessages.TOKEN_NOT_FOUND_ERROR.getMessage());
         }
@@ -154,9 +161,9 @@ public class TokenServiceImpl implements TokenService {
     @Override
     @Transactional
     public void invalidateToken(String token) {
+
         if (tokenRepository.findByToken(token) != null) {
             tokenRepository.deleteByToken(token);
         }
     }
-
 }
